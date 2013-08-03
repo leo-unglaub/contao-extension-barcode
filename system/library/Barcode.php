@@ -127,7 +127,7 @@ class Barcode extends Controller
 			escapeshellarg($strCode),
 			escapeshellarg($intWidth),
 			escapeshellarg($intHeight),
-			escapeshellarg($strAdditionalCommands),
+			$strAdditionalCommands,
 			escapeshellarg($strFormat)
 		);
 
