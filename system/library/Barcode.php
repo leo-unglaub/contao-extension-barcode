@@ -32,26 +32,25 @@
  * Class Barcode
  * Contains methods to generate barcodes and store them as images
  *
- *
  * Usage:
  *   You have to use this class in two steps. The first step is to
  *   generate the barcode as an image. This image gets stored in the
  *   property $strImage.
  *
- *   After that you choose between the methods "saveToFile()" and
- *   "saveToBrowser()". The name of the methods is program. :)
+ *   After that you choose between the methods "saveToFile ()" and
+ *   "saveToBrowser ()". The name of the methods is program. :)
  *
  *
  * Example:
  *   // store the barcode as a file
- *   $objBarcode = new Barcode();
- *   $objBarcode->generateCode('12345678', '128c', 400, 500);
- *   $objBarcode->saveToFile('system/html/mybarcode.jpg');
+ *   $objBarcode = new Barcode ();
+ *   $objBarcode->generateCode ('12345678', '128c', 400, 500);
+ *   $objBarcode->saveToFile ('system/html/mybarcode.jpg');
  *
  *   // send the barcode directly to the browser
- *   $objBarcode = new Barcode();
- *   $objBarcode->generateCode('12345678', '128c', 400, 500);
- *   $objBarcode->saveToBrowser('fake-filename.jpg');
+ *   $objBarcode = new Barcode ();
+ *   $objBarcode->generateCode ('12345678', '128c', 400, 500);
+ *   $objBarcode->saveToBrowser ('fake-filename.jpg');
  */
 class Barcode extends Controller
 {
@@ -93,9 +92,9 @@ class Barcode extends Controller
 	 * @param	string	$strCommand		The command for the shell.
 	 * @return	string					The output from the shell command.
 	 */
-	protected function callShellScript($strCommand)
+	protected function callShellScript ($strCommand)
 	{
-		return shell_exec($strCommand);
+		return shell_exec ($strCommand);
 	}
 
 
@@ -110,12 +109,20 @@ class Barcode extends Controller
 	 * @param	string	$strAdditionalCommands	Additional commands for the shell program.
 	 * @return	void
 	 */
-	public function generateCode($strCode, $strType, $intWidth, $intHeight, $strFormat='jpg', $strAdditionalCommands='')
+	public function generateCode
+	(
+		$strCode,
+		$strType,
+		$intWidth,
+		$intHeight,
+		$strFormat = 'jpg',
+		$strAdditionalCommands = ''
+	)
 	{
 		// check if the requested barcode type is supported
-		if (!in_array($strType, $this->arrSupportedBarcodeTypes))
+		if (!in_array ($strType, $this->arrSupportedBarcodeTypes))
 		{
-			throw new Exception('The requested barcode type is not supported');
+			throw new Exception ('The requested barcode type is not supported');
 		}
 
 
@@ -123,17 +130,17 @@ class Barcode extends Controller
 		$strCommand = sprintf
 		(
 			'/usr/bin/barcode -e %s -b %s -g %sx%s %s | /usr/bin/convert.im6 -trim - %s:-',
-			escapeshellarg($strType),
-			escapeshellarg($strCode),
-			escapeshellarg($intWidth),
-			escapeshellarg($intHeight),
+			escapeshellarg ($strType),
+			escapeshellarg ($strCode),
+			escapeshellarg ($intWidth),
+			escapeshellarg ($intHeight),
 			$strAdditionalCommands,
-			escapeshellarg($strFormat)
+			escapeshellarg ($strFormat)
 		);
 
 
 		// generate the barcode
-		$this->strImage = $this->callShellScript($strCommand);
+		$this->strImage = $this->callShellScript ($strCommand);
 	}
 
 
@@ -143,11 +150,11 @@ class Barcode extends Controller
 	 * @param	string	$strFilename	The filename of your barcode image.
 	 * @return	void
 	 */
-	public function saveToFile($strFilename)
+	public function saveToFile ($strFilename)
 	{
-		$objFile = new File($strFilename);
-		$objFile->write($this->strImage);
-		$objFile->close();
+		$objFile = new File ($strFilename);
+		$objFile->write ($this->strImage);
+		$objFile->close ();
 	}
 
 
@@ -157,14 +164,12 @@ class Barcode extends Controller
 	 * @param	string	$strFilename	The fake-filename for the download.
 	 * @return	void
 	 */
-	public function saveToBrowser()
+	public function saveToBrowser ()
 	{
-		throw new Exception('Does not work because of the fucked up Contao implementation of sendFileToBrowser();');
+		throw new Exception ('Does not work because of the fucked up Contao implementation of sendFileToBrowser();');
 
-		$strPath = uniqid('system/tmp/barcode-');
-		$this->saveToFile($strPath);
-		$this->sendFileToBrowser($strPath);
+		$strPath = uniqid ('system/tmp/barcode-');
+		$this->saveToFile ($strPath);
+		$this->sendFileToBrowser ($strPath);
 	}
 }
-
-?>
