@@ -1,0 +1,41 @@
+{
+	"name": "leo-unglaub/contao-barcode",
+	"description": "Allows developers to easily generate barcodes/qr codes and store them as images.",
+	"keywords": [
+		"contao",
+		"barcode",
+		"user",
+		"member"
+	],
+	"type": "contao-module",
+	"license": "LGPL-3.0+",
+	"authors": [
+		{
+			"name": "Leo Unglaub",
+			"email": "leo@unglaub.at",
+			"homepage": "https://leo.unglaub.at",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"issues": "https://bitbucket.org/leo-unglaub/contao-barcode/issues",
+		"source": "https://bitbucket.org/leo-unglaub/contao-barcode/src/",
+		"email": "leo@leo-unglaub.net",
+		"irc": "irc://irc.freenode.org/contao.dev"
+	},
+	"require": {
+		"php": "^5.6 || ^7.0",
+		"contao/core": "~3",
+		"contao-community-alliance/composer-installer": "*"
+	},
+	"replace": {
+		"contao-legacy/barcode": "*"
+	},
+	"extra": {
+		"contao": {
+			"sources": {
+				"src/system/modules/barcode": "system/modules/barcode"
+			}
+		}
+	}
+}
