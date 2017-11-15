@@ -14,6 +14,7 @@
  *
  *
  * Example:
+ *
  *   // store the barcode as a file
  *   $objBarcode = new Barcode ();
  *   $objBarcode->generateCode ('12345678', '128c', 400, 500);
