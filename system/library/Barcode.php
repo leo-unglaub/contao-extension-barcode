@@ -1,16 +1,6 @@
 <?php
 
 /**
- * contao-barcode
- *
- * @copyright	Leo Unglaub 2016
- * @author		Leo Unglaub <leo@leo-unglaub.net>
- * @package		contao-barcode
- * @license		GPL
- */
-
-
-/**
  * Class Barcode
  * Contains methods to generate barcodes and store them as images
  *
